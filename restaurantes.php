@@ -1,3 +1,11 @@
+<?php
+include "admin/dbcon.php";
+
+$quearyrest = "SELECT * FROM negocios";
+
+$res = mysqli_query($con, $quearyrest);
+
+?>
 <section class="p-2">
     <div class="container">
         <div class="card">
@@ -5,40 +13,22 @@
                 <h1>Restaurantes</h1>
             </div>
             <div class="row p-2 text-center">
-                <div class="col-3 p-2">
-                    <div class="card p-2" style="height: 12rem;">
-                        <img src="upload/restaurantes/nortenas-burger/nortenas-burger-logo.jpg" class="card-img-top align-self-center w-25" alt="">
-                        <div class="card-body">
-                            <h3>Norteñas Burger</h3>
+                <?php
+                while ($lista = mysqli_fetch_assoc($res)) {
+                ?>
+                    <div class="col-3 p-2">
+                        <div class="card p-2" style="height: 12rem;">
+                            <a href="index.php?vista=productos&id=<?php echo $lista['id']; ?>&pagina=1">
+                                <img src="<?php echo $lista['logo']; ?>" class="card-img-top align-self-center w-25" alt="">
+                                <div class="card-body">
+                                    <h3><?php echo $lista['nombre']; ?></h3>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="col-3 p-2">
-                    <div class="card p-2" style="height: 12rem;">
-                        <img src="upload/restaurantes/starbucks/starbucks-logo.png" class="card-img-top align-self-center w-25" alt="">
-                        <div class="card-body">
-                            <h3>Starbucks Coffe</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 p-2">
-                    <div class="card p-2" style="height: 12rem;">
-                        <a href="index.php?vista=cinepolis&id=">
-                            <img src="upload/restaurantes/Cinepolis/cinepolis logo.png" class="card-img-top align-self-center w-25" alt="">
-                            <div class="card-body">
-                                <h3>Cinépolis</h3>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-3 p-2">
-                    <div class="card p-2" style="height: 12rem;">
-                        <img src="upload/restaurantes/tocumbo/tocumbo-logo.jpg" class="card-img-top align-self-center w-25" alt="">
-                        <div class="card-body">
-                            <h3>Mi Tocumbo</h3>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
